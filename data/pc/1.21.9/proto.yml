@@ -2394,9 +2394,11 @@
       entityId: i32
       vehicleId: i32
    # MC: ClientboundSetEntityMotionPacket
+   # NOTE: Server sends variable-length packets (some 9 bytes with velocity, some 4 bytes without)
+   # Using restBuffer to handle both cases and avoid PartialReadError
    packet_entity_velocity:
       entityId: varint
-      velocity: lpvec3
+      data: restBuffer
    # MC: ClientboundSetEquipmentPacket
    packet_entity_equipment:
       entityId: varint
